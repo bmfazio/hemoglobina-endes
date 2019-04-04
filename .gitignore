@@ -6,3 +6,4 @@ packrat/lib*/
 packrat/src/
 config.ini
 *.Rhistory
+.Rproj.user
