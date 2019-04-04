@@ -2,5 +2,5 @@
 *.rds
 *.lnk
 *.rdata
-packrat/
+packrat/lib*/
 config.ini
