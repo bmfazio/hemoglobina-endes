@@ -3,3 +3,4 @@
 *.lnk
 *.rdata
 packrat/
+config.ini
