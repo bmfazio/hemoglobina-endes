@@ -1,3 +1,8 @@
+# ez save
+ezsave <- function(x) {
+  save(list = x, file = "out/" %p0% x %p0% ".rds")
+  rm(list = x, envir = .GlobalEnv)
+}
 # custom fitting
 fit <- function(data_, formula_) {
   brm(formula_,
@@ -6,26 +11,31 @@ fit <- function(data_, formula_) {
 }
 
 ###
+set.seed(101)
 m1.2016 <- endes2016 %>%
   filter(!is.na(hb) & rtotal > 0) %>%
   fit(hb ~
         t2(total, altura) + s(edad, bs = "cr") + s(nse, bs = "cr"))
+ezsave("m1.2016")
 
 m1_adj.2016 <- endes2016 %>%
   filter(!is.na(hb) & rtotal > 0) %>%
   fit(hb_adj ~
         t2(total, altura) + s(edad, bs = "cr") + s(nse, bs = "cr"))
+ezsave("m1_adj.2016")
 
 m2.2016 <- endes2016 %>%
   filter(!is.na(hb) & rtotal > 0) %>%
   fit(hb ~
         t2(total, altura) + s(edad, bs = "cr") + s(nse, bs = "cr") + region)
+ezsave("m2.2016")
 
 m2_r.2016 <- endes2016 %>%
   filter(!is.na(hb) & rtotal > 0) %>%
   fit(hb ~
         t2(total, altura) + s(edad, bs = "cr") + s(nse, bs = "cr") + region +
         (1|cluster))
+ezsave("m2_r.2016")
 
 m3.2016 <- endes2016 %>%
   filter(!is.na(hb)) %>%
@@ -33,31 +43,32 @@ m3.2016 <- endes2016 %>%
   fit(hb ~
         t2(total, altura, by = rtotal) + s(edad, bs = "cr") +
         s(nse, bs = "cr") + region + (1|cluster))
-
-save(list = c("m1.2016", "m1_adj.2016", "m2.2016", "m2_r.2016", "m3.2016"),
-     file = "out/m2016.rds")
-rm(list = c("m1.2016", "m1_adj.2016", "m2.2016", "m2_r.2016", "m3.2016"))
+ezsave("m3.2016")
 
 m1.2017 <- endes2017 %>%
   filter(!is.na(hb) & rtotal > 0) %>%
   fit(hb ~
         t2(total, altura) + s(edad, bs = "cr") + s(nse, bs = "cr"))
+ezsave("m1.2017")
 
 m1_adj.2017 <- endes2017 %>%
   filter(!is.na(hb) & rtotal > 0) %>%
   fit(hb_adj ~
         t2(total, altura) + s(edad, bs = "cr") + s(nse, bs = "cr"))
+ezsave("m1_adj.2017")
 
 m2.2017 <- endes2017 %>%
   filter(!is.na(hb) & rtotal > 0) %>%
   fit(hb ~
         t2(total, altura) + s(edad, bs = "cr") + s(nse, bs = "cr") + region)
+ezsave("m2.2017")
 
 m2_r.2017 <- endes2017 %>%
   filter(!is.na(hb) & rtotal > 0) %>%
   fit(hb ~
         t2(total, altura) + s(edad, bs = "cr") + s(nse, bs = "cr") + region +
         (1|cluster))
+ezsave("m2_r.2017")
 
 m3.2017 <- endes2017 %>%
   filter(!is.na(hb)) %>%
@@ -65,7 +76,4 @@ m3.2017 <- endes2017 %>%
   fit(hb ~
         t2(total, altura, by = rtotal) + s(edad, bs = "cr") +
         s(nse, bs = "cr") + region + (1|cluster))
-
-save(list = c("m1.2017", "m1_adj.2017", "m2.2017", "m2_r.2017", "m3.2017"),
-     file = "out/m2017.rds")
-rm(list = c("m1.2017", "m1_adj.2017", "m2.2017", "m2_r.2017", "m3.2017"))
+ezsave("m3.2017")
