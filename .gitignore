@@ -3,7 +3,7 @@
 *.lnk
 *.rdata
 packrat/lib*/
-packrat/src/
 config.ini
 *.Rhistory
 .Rproj.user
+packrat/src/
